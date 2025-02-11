@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <time.h>
 
-// Tarih ve saat bilgisini tutan bir yapı (struct)
 struct TarihSaat {
     int yil;
     int ay;
@@ -11,7 +10,7 @@ struct TarihSaat {
     int saniye;
 };
 
-// Tarih ve Saat ve zaman farkı bilgilerini tutan bir birleştirme (union)
+// Tarih ve Saat ve zaman farkı bilgilerini tutan bileşenler
 union Veri {
     struct TarihSaat tarihSaat;
     time_t epochZamani;
@@ -20,13 +19,13 @@ union Veri {
 // Tarih ve saati epoch zamanına çeviren bir fonksiyon
 time_t epochCevir(struct TarihSaat ts) {
     struct tm t;
-    t.tm_year = ts.yil - 1900; // tm_year 1900'dan itibaren yıl sayısını tutar
-    t.tm_mon = ts.ay - 1;      // tm_mon 0-11 arası ay sayısını tutar
+    t.tm_year = ts.yil - 1900; 
+    t.tm_mon = ts.ay - 1;     
     t.tm_mday = ts.gun;
     t.tm_hour = ts.saat;
     t.tm_min = ts.dakika;
     t.tm_sec = ts.saniye;
-    t.tm_isdst = -1; // Yaz saati uygulaması geçerli değil
+    t.tm_isdst = -1; // Yaz saati gecerli değil
 
     return mktime(&t);
 }
